@@ -1,7 +1,7 @@
 import highrise
 from highrise import BaseBot
 
-BOT_TOKEN = "f38c6c63c0b03e572c699981d0cbbc664c3f7a89f7fec5182189a5a1077027bf"
+BOT_TOKEN = "5ff2d317c2efd26d3005ee486fb658768d869d075df57774ebabd98a98bac17b"
 ROOM_ID = "6a95a3ab0cfd91711d40d5d6"
 
 class Bot(BaseBot):
