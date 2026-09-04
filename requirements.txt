@@ -6,3 +6,5 @@ cattrs>=23.0
 attrs>=23.0
 quattro
 typing-extensions
+pendulum
+pydantic
