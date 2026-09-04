@@ -1,3 +1,15 @@
+import zipfile
+import sys
+import os
+
+# Dézippe le SDK au démarrage si pas déjà fait
+if not os.path.exists('./python-bot-sdk-main'):
+    with zipfile.ZipFile('python-bot-sdk-main.zip', 'r') as zip_ref:
+        zip_ref.extractall('.')
+
+sys.path.append('./python-bot-sdk-main')
+from highrise import BaseBot, Highrise
+import asyncio
 import os
 import asyncio
 from highrise import BaseBot
