@@ -1,3 +1,6 @@
+setuptools
+wheel
+git+https://github.com/highrise-dev/highrise.py.git
 websockets==11.0.3
 python-dotenv==1.0.0
 highrise.py @ git+https://github.com/highrise-dev/highrise.py.git
