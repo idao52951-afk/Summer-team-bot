@@ -10,8 +10,9 @@ if not os.path.exists('./python-bot-sdk-main'):
         zip_ref.extractall('.')
     print("SDK Extracted!")
 
-# 2. Ajoute le dossier du SDK au path pour que Python le trouve
-sys.path.append('./python-bot-sdk-main')
+# 2. Ajoute LE DOSSIER QUI CONTIENT "highrise" au path
+# Le dossier s'appelle python-bot-sdk-main/python-bot-sdk-main
+sys.path.append('./python-bot-sdk-main/python-bot-sdk-main')
 
 # 3. Import du SDK Highrise
 from highrise import BaseBot, Highrise
@@ -23,12 +24,10 @@ class Bot(BaseBot):
 
     async def on_chat(self, user, message):
         print(f"{user.username}: {message}")
-        # Exemple: répond "salut" si quelqu'un dit salut
         if message.lower() == "salut":
             await self.highrise.chat(f"Salut {user.username} 👋")
 
 if __name__ == "__main__":
-    # Récupère le token et room_id depuis Render Environment
     token = os.getenv("HIGHRISE_TOKEN")
     room_id = os.getenv("ROOM_ID")
 
