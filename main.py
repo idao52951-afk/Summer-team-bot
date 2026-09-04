@@ -1,45 +1,18 @@
 import asyncio
-import os
-from highrise import BaseBot, User, AnchorPosition, Position, Reaction, ChatEvent
+from highrise import BaseBot
 from highrise.__main__ import main
 
-DANCES = {
-    "cozynap": "dance-cute",
-    "dance": "dance-tiktok8",
-    "wave": "emote-wave"
-}
-
-VIP_USERS = set()
+BOT_TOKEN = 5ff2d317c2efd26d3005ee486fb658768d869d075df57774ebabd98a98bac17b
+ROOM_ID = https://high.rs/world?id=6894bd39e3e4a405517cb530&ownedRoomId=6a95a3ab0cfd91711d40d5d6&invite_id=6a986f31259f48a4c29ed5cd
 
 class Bot(BaseBot):
     async def on_start(self):
-        print("Bot connecté!")
-        await self.highrise.chat("Bot est en ligne ✅")
+        await self.highrise.chat("Bot du lycée connecté ✅ Tape !help")
 
-    async def on_user_join(self, user: User):
-        await self.highrise.chat(f"Bienvenue @{user.username} dans la room ❤️😍! Soyez respectueux et amusez-vous bien!")
+    async def on_chat(self, user, message):
+        if message.lower() == "!help":
+            await self.highrise.chat("Commandes: !help | !dance | !vip")
+        if message.lower() == "!dance":
+            await self.highrise.send_emote("dance-tiktok8", user.id)
 
-    async def on_chat(self, user: User, message: str):
-        msg = message.lower()
-        if msg == "stop":
-            await self.highrise.walk_to(Position(0, 0, 0))
-            await self.highrise.chat("Animation arrêtée ✅")
-            return
-        if msg.startswith("!"):
-            cmd = msg[1:]
-            if cmd in DANCES:
-                await self.highrise.send_emote(DANCES[cmd], user.id)
-                await self.highrise.chat(f"Vous bouclez [{cmd}]! Tapez 'Stop' pour arrêter.")
-                return
-        if msg == "!vip":
-            await self.highrise.chat("Envie de profiter du VIP? Envoyez 500g au bot!")
-        if msg == "!help":
-            await self.highrise.chat("Commandes:!dance,!cozynap,!wave,!vip,!help. Tape Stop pour arrêter.")
-
-    async def on_tip(self, sender: User, receiver: User, tip):
-        if receiver.id == self.bot_user.id and tip.amount >= 500:
-            VIP_USERS.add(sender.id)
-            await self.highrise.chat(f"Merci @{sender.username} pour le VIP 👑 Tu as accès aux zones VIP maintenant!")
-
-if __name__ == "__main__":
-    asyncio.run(main(Bot()))
+asyncio.run(main(Bot(), BOT_TOKEN, ROOM_ID))
