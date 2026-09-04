@@ -1,3 +1,2 @@
 setuptools
 wheel
-git+https://github.com/highrisesdk/python-bot-sdk.git@main
