@@ -1,1 +1,3 @@
-highrise==1.1.0
+git+https://github.com/highrise-dev/highrise.py.git
+setuptools
+wheel
