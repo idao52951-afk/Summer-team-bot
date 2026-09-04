@@ -34,7 +34,7 @@ class Bot(BaseBot):
         if message.lower() == "salut":
             await self.highrise.chat(f"Salut {user.username} 👋")
 
-if __name__ == "__main__":
+async def main():
     token = os.getenv("HIGHRISE_TOKEN")
     room_id = os.getenv("ROOM_ID")
 
@@ -42,7 +42,10 @@ if __name__ == "__main__":
         print("ERROR: HIGHRISE_TOKEN or ROOM_ID missing in Environment")
         exit(1)
 
-    # NOUVELLE FAÇON DE LANCER
-    highrise = Highrise()
+    # VERSION QUI MARCHE AVEC TON SDK
+    highrise = Highrise(token, room_id)
     bot = Bot()
-    asyncio.run(highrise.run(token, room_id, bot))
+    await highrise.start(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
