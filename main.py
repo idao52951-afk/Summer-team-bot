@@ -4,10 +4,10 @@ from highrise import BaseBot
 from highrise.__main__ import main
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-ROOM_ID = "6a95a3ab0cfd91711d40d5d6"
+ROOM_ID = "6894bd39e3e4a405517cb530"  # L'ID de la room
 
 class Bot(BaseBot):
-    async def on_start(self):
+    async def on_start(self, session_metadata):
         await self.highrise.chat("Bot du lycée connecté ✅ Tape !help")
 
     async def on_chat(self, user, message):
@@ -20,6 +20,6 @@ class Bot(BaseBot):
             await self.highrise.send_emote("dance-tiktok8", user.id)
         
         if msg == "!vip":
-            await self.highrise.chat(f"{user.username} tu es VIP 👑")
+            await self.highrise.chat(f"{user.username} est VIP 👑")
 
-asyncio.run(main(Bot(), BOT_TOKEN, ROOM_ID))
+main(BOT_TOKEN, ROOM_ID)
