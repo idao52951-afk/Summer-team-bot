@@ -2,3 +2,5 @@ setuptools
 wheel
 aiohttp
 websockets
+cattrs
+attrs
