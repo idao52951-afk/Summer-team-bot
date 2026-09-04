@@ -2,37 +2,30 @@ import zipfile
 import sys
 import os
 
-# Dézippe le SDK au démarrage si pas déjà fait
+# 1. Dézippe le SDK d'abord
 if not os.path.exists('./python-bot-sdk-main'):
+    print("Extracting SDK...")
     with zipfile.ZipFile('python-bot-sdk-main.zip', 'r') as zip_ref:
         zip_ref.extractall('.')
 
+# 2. Ajoute le dossier au path
 sys.path.append('./python-bot-sdk-main')
+
+# 3. Maintenant on importe
 from highrise import BaseBot, Highrise
 import asyncio
-import os
-import asyncio
-from highrise import BaseBot
-from highrise.__main__ import main
-from highrise import BaseBot, Position
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-ROOM_ID = "6894bd39e3e4a405517cb530"  # L'ID de la room
-
+# 4. TON CODE DE BOT VIENT ICI
+# Exemple basique:
 class Bot(BaseBot):
-    async def on_start(self, session_metadata):
-        await self.highrise.chat("Bot du lycée connecté ✅ Tape !help")
+    async def on_start(self, session):
+        print("Bot started!")
 
-    async def on_chat(self, user, message):
-        msg = message.lower()
-        
-        if msg == "!help":
-            await self.highrise.chat("Commandes: !help | !dance | !vip")
-        
-        if msg == "!dance":
-            await self.highrise.send_emote("dance-tiktok8", user.id)
-        
-        if msg == "!vip":
-            await self.highrise.chat(f"{user.username} est VIP 👑")
-
-main(BOT_TOKEN, ROOM_ID)
+if __name__ == "__main__":
+    # Mets ton token ici
+    token = os.getenv("HIGHRISE_TOKEN")
+    room_id = os.getenv("ROOM_ID")
+    
+    highrise = Highrise(token, room_id)
+    bot = Bot()
+    asyncio.run(highrise.run(bot))
