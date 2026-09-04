@@ -4,14 +4,14 @@ import os
 import asyncio
 import glob
 
-# 1. Dézippe le SDK au démarrage
+# 1. Dézippe le SDK
 if not os.path.exists('./python-bot-sdk-main'):
     print("Extracting SDK...")
     with zipfile.ZipFile('python-bot-sdk-main.zip', 'r') as zip_ref:
         zip_ref.extractall('.')
     print("SDK Extracted!")
 
-# 2. TROUVE AUTOMATIQUEMENT LE DOSSIER QUI CONTIENT "highrise"
+# 2. Trouve le dossier SDK
 sdk_paths = glob.glob('./python-bot-sdk-main/**/highrise', recursive=True)
 if sdk_paths:
     sdk_folder = os.path.dirname(sdk_paths[0])
@@ -20,13 +20,14 @@ if sdk_paths:
 else:
     print("ERROR: Could not find highrise folder")
 
-# 3. Import du SDK Highrise
+# 3. Import
 from highrise import BaseBot, Highrise
 
-# 4. TON BOT ICI
+# 4. TON BOT
 class Bot(BaseBot):
     async def on_start(self, session):
         print("Bot started! Connected to Highrise ✅")
+        await self.highrise.chat("Bot en ligne! 👋")
 
     async def on_chat(self, user, message):
         print(f"{user.username}: {message}")
@@ -41,6 +42,7 @@ if __name__ == "__main__":
         print("ERROR: HIGHRISE_TOKEN or ROOM_ID missing in Environment")
         exit(1)
 
-    highrise = Highrise(token, room_id)
+    # NOUVELLE FAÇON DE LANCER
+    highrise = Highrise()
     bot = Bot()
-    asyncio.run(highrise.run(bot))
+    asyncio.run(highrise.run(token, room_id, bot))
