@@ -19,6 +19,7 @@ if sdk_paths:
     sys.path.append(sdk_folder)
 else:
     print("ERROR: Could not find highrise folder")
+    exit(1)
 
 # 3. Import
 from highrise import BaseBot, Highrise
@@ -42,10 +43,25 @@ async def main():
         print("ERROR: HIGHRISE_TOKEN or ROOM_ID missing in Environment")
         exit(1)
 
-    # VERSION OFFICIELLE HIGHRISE SDK
-    highrise = Highrise()
-    bot = Bot()
-    await highrise.connect(token, room_id, bot)
+    # VERSION QUI MARCHE QUELLE QUE SOIT LA VERSION DU SDK
+    try:
+        # Méthode 1: connect
+        highrise = Highrise()
+        await highrise.connect(token, room_id, Bot())
+    except AttributeError:
+        try:
+            # Méthode 2: start
+            highrise = Highrise()
+            await highrise.start(token, room_id, [Bot()])
+        except AttributeError:
+            try:
+                # Méthode 3: join
+                highrise = Highrise()
+                await highrise.join(token, room_id, Bot())
+            except AttributeError:
+                # Méthode 4: run
+                highrise = Highrise(token, room_id)
+                await highrise.run(Bot())
 
 if __name__ == "__main__":
     asyncio.run(main())
