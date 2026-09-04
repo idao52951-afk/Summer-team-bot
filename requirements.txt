@@ -1,1 +1,1 @@
-highrise
+git+https://github.com/highrise-sdk/highrise.py.git
