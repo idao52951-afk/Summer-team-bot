@@ -2,6 +2,7 @@ import os
 import asyncio
 from highrise import BaseBot
 from highrise.__main__ import main
+from highrise import BaseBot, Position
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 ROOM_ID = "6894bd39e3e4a405517cb530"  # L'ID de la room
