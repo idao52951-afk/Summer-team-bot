@@ -1,11 +1,1 @@
-setuptools
-wheel
-aiohttp>=3.8.0
-websockets>=11.0
-cattrs>=23.0
-attrs>=23.0
-quattro
-typing-extensions
-pendulum
-pydantic
-websockets
+highrise==1.0.0
