@@ -8,3 +8,4 @@ quattro
 typing-extensions
 pendulum
 pydantic
+websockets
