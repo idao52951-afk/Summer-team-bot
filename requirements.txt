@@ -1,1 +1,2 @@
-highrise-py==1.0.0
+git+https://github.com/Highrise-HQ/python-bot-sdk.git
+websockets>=11.0
