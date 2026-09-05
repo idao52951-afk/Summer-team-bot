@@ -43,9 +43,4 @@ async def main():
         print("ERROR: HIGHRISE_TOKEN or ROOM_ID missing in Environment")
         exit(1)
 
-    # VERSION FINALE POUR TON SDK
-    highrise = Highrise(token, room_id)
-    await highrise.run([Bot()])
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    # VERSION P
