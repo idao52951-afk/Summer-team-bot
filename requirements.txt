@@ -1,1 +1,1 @@
-highrise==1.0.0
+highrise-py==1.0.0
