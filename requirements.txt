@@ -1,2 +1,2 @@
-highrise-py==1.0.0
+highrise==3.1.2
 websockets==12.0
