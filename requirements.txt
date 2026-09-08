@@ -1,2 +1,1 @@
-highrise-py==0.1.8
-websockets==12.0
+highrise-sdk
