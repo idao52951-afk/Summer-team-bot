@@ -1,3 +1,2 @@
-highrise
+git+https://github.com/HighriseBot/highrise.py.git
 websockets
-asyncio
