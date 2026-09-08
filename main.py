@@ -1,18 +1,19 @@
-import asyncio
 import os
-from highrise import HighriseBot, SessionMetadata
+import asyncio
+from highrise import BaseBot, User, Anchor, SessionMetadata
+from highrise.__main__ import main
 
-async def main():
-    bot_token = os.getenv("HIGHRISE_TOKEN")
-    room_id = os.getenv("ROOM_ID")
-    
-    if not bot_token or not room_id:
-        print("ERROR: Mets HIGHRISE_TOKEN et ROOM_ID dans les Secrets de Render")
-        return
+TOKEN = os.getenv("HIGHRISE_TOKEN")
+ROOM_ID = os.getenv("ROOM_ID")
 
-    session_metadata = SessionMetadata(bot_token=bot_token, room_id=room_id)
-    bot = HighriseBot(session_metadata)
-    await bot.run()
+class Bot(BaseBot):
+    async def on_start(self, session: SessionMetadata):
+        print(f"Bot démarré dans la room: {session.room_id}")
 
-if __name__ == "__main__":
-    asyncio.run(main())
+    async def on_user_join(self, user: User, position: Anchor):
+        await self.highrise.chat(f"Bienvenue {user.username} dans la room ! 👋")
+
+    async def on_chat(self, user: User, message: str):
+        if message.lower() == "!help":
+            await self.highrise.chat(f"{user.username} → Commandes: !help, !ping")
+        
