@@ -1,2 +1,2 @@
-git+https://github.com/HighriseBot/highrise.py.git
+highrise-sdk
 websockets
