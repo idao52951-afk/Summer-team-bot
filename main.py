@@ -9,4 +9,4 @@ ROOM_ID = os.getenv("ROOM_ID")
 
 class Bot(BaseBot):
     async def on_start(self, session_metadata: SessionMetadata):
-        print(f"Bot connecté ! Room: {session_metadata.room_id}")
+        print(f"Bot connecté ! Room:
