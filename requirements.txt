@@ -1,1 +1,2 @@
-websockets
+highrise-bot-sdk==25.1.0
+python-dotenv==1.0.1
