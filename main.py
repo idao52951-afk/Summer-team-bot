@@ -1,12 +1,11 @@
 import os
 import asyncio
-from highrise import BaseBot, Highrise, __main__
-from highrise.models import SessionMetadata, User, AnchorPosition, Reaction, ChatEvent
+from highrise import __main__
 
 # On récupère les variables de Railway
 TOKEN = os.getenv("HIGHRISE_TOKEN")
 ROOM_ID = os.getenv("ROOM_ID")
 
-class Bot(BaseBot):
-    async def on_start(self, session_metadata: SessionMetadata):
-        print(f"Bot connecté ! Room:
+if __name__ == "__main__":
+    # format: "fichier:Classe", ROOM_ID, TOKEN
+    __main__.run(("bot:Bot", ROOM_ID, TOKEN))
